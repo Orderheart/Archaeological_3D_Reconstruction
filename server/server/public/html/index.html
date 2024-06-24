@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>三维重建-WELCOME</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Google fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="/html/css/style.default.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="/html/css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="/html/img/con.png">
+    <style>
+      .container_1 {
+        position: fixed;
+        width: 1000px;
+        height: 300px;
+        border: 1px solid transparent; /* 将边框颜色设置为透明 */
+        top: 5vh;
+        right: 10vw;
+      }
+    
+      .image_1 {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 200px;
+        height: 200px;
+        filter: brightness(125%);
+      }
+
+
+      html {
+        font-size: 30px; /* 设置根元素的字体大小 */
+      }
+
+      #all1{
+        height: 100vh;
+        width: 100vw;
+        padding: 10%;
+        opacity: 1;
+      }
+      
+      #all2{
+        height: 100vh;
+        width: 100vw;
+        display: fixed;
+        padding: 10%;
+        font-size: 30px;
+      }
+
+      body{
+        background-image:url(/html/img/background.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+      }
+
+    </style> 
+    
+  </head>
+  <body>
+    <div class="container_1">
+      <img class = "image_1" src="/html/img/con.png">
+    </div>
+    <div id="all1">
+      
+        <div class="container text-center text-white position-abusolute z-index-20 pt-lg-5 my-5">
+          <h1 class="text-shadow mb-5" id="p_head">千映</h1>
+          <p class="h2 font-family-base fw-light text-shadow" id="p_cont">基于高斯喷溅端边云田野考古三维重建系统 </p>
+          
+        </div>
+        <div class="container text-white text-center z-index-20 py-5">
+          
+          <p class="h3 font-family-base fw-light mb-4 text-shadow" id="come_up" >下滑了解我们的工作</p>
+          <div class="row">
+            <div class="col-lg-5 mx-auto">
+              <form class="d-flex d-inline-block w-100 flex-column flex-lg-row justify-content-center">
+                <div class="input-group">
+                  <button class="btn btn-primary letter-spacing-3 mb-2 rounded"  style="display:block;margin:0 auto" id="btn_go">云端漫步</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <footer class="py-4 w-100 text-sm text-white z-index-20 position-relative">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-6 text-center text-sm-start">
+                <p style="font-size: large;">&copy; 四川大学计算机学院</p>
+              </div>
+              <div class="col-sm-6 text-center text-sm-end">
+                <p style="font-size: large;" class="mb-1">&copy;四川大学历史文化学院</p>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+
+        
+    <div id="all2">
+      <div class="container text-center text-white position-abusolute z-index-20 pt-lg-5 my-5 h3"  >
+        千映：基于NeRF衍生的端边云田野考古三维重建系统，是一款采用了“端-边-云”系统框架，针对田野考古发掘现场的实时三维重建任务的工作系统。本系统实现了端到端的数据传输和三维重建，并利用Gaussian Splatting等先进点云重建算法构建针对田野考古发掘现场的边缘三维重建算法模型。通过华为昇思MindSpore框架和华为云平台，构 建了三维重建数据信息采集、算法模型的数据传输和存储依赖系统。本系统集成了GUI界面，完成了采集、建模和渲染的一体化工作。
+      </div>
+
+    </div>
+    <!-- JavaScript files-->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/theme.js"></script>
+
+    <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <script>
+       document.getElementById('btn_go').onclick = function(){
+          window.location.href = "choose/2.html";
+          return false;
+        }
+
+        
+      var fadeOutDiv = document.getElementById('all1');
+      var comeupDiv = document.getElementById('all2');
+      var flag = true;
+        // 监听鼠标滚轮事件
+      window.addEventListener('wheel', function(event) {
+      
+        // 判断滚轮滚动方向
+      if (event.deltaY > 0) {
+        // 向下滚动，逐渐降低透明度
+        if(flag) {
+          fadeOutDiv.style.opacity = 1;
+          comeupDiv.style.opacity = 0;
+          flag = !flag;
+        }
+        else{
+          fadeOutDiv.style.opacity = Math.max(0, Number(fadeOutDiv.style.opacity) - 0.1);
+          comeupDiv.style.opacity = 1 - Number( fadeOutDiv.style.opacity);
+          if(Number(fadeOutDiv.style.opacity) === 0) {
+            fadeOutDiv.style.display = 'none';
+            comeupDiv.style.display = 'block';
+          }
+        }
+      } else {
+        // 向上滚动，逐渐增加透明度
+        fadeOutDiv.style.opacity = Math.min(1, parseFloat(fadeOutDiv.style.opacity) + 0.1);
+        comeupDiv.style.opacity = 1 - Number(fadeOutDiv.style.opacity);
+
+        if(Number(fadeOutDiv.style.opacity) === 1) {
+          fadeOutDiv.style.display = 'block';
+          comeupDiv.style.display = 'none';
+        }
+      }
+      });
+    </script>
+
+  </body>
+</html>
