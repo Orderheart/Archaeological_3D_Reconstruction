@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title> 云端漫步</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="html.design">
+<!-- description -->
+<meta name="description" content="Responsive Team Cards Flipper - Template">
+<link rel="shortcut icon" href="images/favicon.ico">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<!-- Fontawesome CSS -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
+<!-- Fonts and icons -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700" rel="stylesheet"> 
+<!-- Reset CSS -->
+<link rel="stylesheet" href="css/reset.css">
+<!-- Style CSS -->
+<link rel="stylesheet" href="css/style.css">
+<!-- Responsive  CSS -->
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="icon" href="images/con.png">
+<style>
+     .pos-container {
+        position: relative;
+        font-size: 20px;
+        
+    }
+    
+    .pos {
+        position: absolute;
+        left: 10vw;
+    }
+    
+    .pos_1 {
+        position: absolute;
+        right: 10vw;
+    }
+    
+    .pos_counter {
+        bottom: 10vh;
+        position: fixed;
+        text-align: center;
+        width: 100%;
+    }
+
+    
+</style>
+</head>
+<body>
+
+<div class="team-main">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<h2 class="title-wb">OUR WORK</h2>
+			</div>
+		</div>
+		<div class="row" id="team-cards">
+			<!-- Dynamic team cards will be added here -->
+		</div>
+	</div>
+    <div class="pos_counter">
+        <div class="pos-container">
+            <div class="pos">
+                <div class="col-lg-12">
+                    <p class="copyright text-center">All Rights Reserved. &copy;  <a href="#">四川大学计算机学院</a>
+                    </p>
+                </div>
+            </div>
+            <div class="pos_1">
+                <div class="col-lg-12">
+                    <p class="copyright text-center">All Rights Reserved. &copy; <a href="#">四川大学历史文化学院</a> 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jquery latest version -->
+<script src="js/jquery.min.js"></script>
+<!-- popper.min.js -->
+<script src="js/popper.min.js"></script>    
+<!-- bootstrap js -->
+<script src="js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		// post anxios
+		axios({
+			method:'GET',
+			url:'/ask-data',
+		}).then(res => {
+			var teamData = res.data;
+
+			$.each(teamData, function(index, member){
+			var cardHtml = '<div class="col-lg-3 col-md-6 col-sm-6 col-12" id="' + member.index + '">';
+			cardHtml += '<div class="image-flip" ontouchstart="this.classList.toggle(\'hover\');">';
+			cardHtml += '<div class="flip-team">';
+			cardHtml += '<div class="front-A h-100">';
+			cardHtml += '<div class="card profile-card-5 bor-no" data-image-src="' + member.imageSrc + '">';
+			cardHtml += '<div class="social-line">';
+			
+			cardHtml += '</div>';
+			cardHtml += '<div class="text-content">';
+			cardHtml += '<h3>' + member.name + '</h3>';
+			cardHtml += '<p>' + member.role + '</p>';
+			cardHtml += '</div>';
+			cardHtml += '<div class="filter"></div>';
+			cardHtml += '</div>';
+			cardHtml += '</div>';
+			cardHtml += '<div class="back-b h-100">';
+			cardHtml += '<div class="card bor-no">';
+			cardHtml += '<h4 class="card-title">' + member.name + '</h4>';
+			cardHtml += '<p>' + member.role + '</p>';
+			cardHtml += '<p class="card-text">' + member.description + '</p>';
+			
+			cardHtml += '</div>';
+			cardHtml += '</div>';
+			cardHtml += '</div>';
+			cardHtml += '</div>';
+			cardHtml += '</div>';
+			$('#team-cards').append(cardHtml);
+		});
+
+		for(var i = 1; i < teamData.length; i++ )
+       	{
+        	$("#" + i).bind('click',function(){
+				window.location.href = 'http://8.137.125.44:5173?id=' + $(this).attr('id');
+        	})
+       }
+
+		// Set background images for team cards
+		$(".card").css('background', function () {
+			var bg = ('url(' + $(this).data("image-src") + ') no-repeat center center');
+			return bg;
+		});
+		})
+
+		
+       
+	});
+
+    
+</script>
+</body>
+</html>
